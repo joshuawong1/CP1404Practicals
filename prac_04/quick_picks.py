@@ -1,3 +1,4 @@
+import random
 def main():
     number_limit = 6
     minimum_number = 1
