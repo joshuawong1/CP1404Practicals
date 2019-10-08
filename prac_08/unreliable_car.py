@@ -1,21 +1,20 @@
-from prac_08.unreliable_car import UnreliableCar
+from random import randint
+from prac_08.car import Car
 
 
-def main():
-    """Test some UnreliableCars."""
+class UnreliableCar(Car):
+    """An unreliable version of a car."""
 
-    # create cars with different reliabilities
-    good_car = UnreliableCar("Mostly Good", 100, 90)
-    bad_car = UnreliableCar("Dodgy", 100, 9)
+    def __init__(self, name, fuel, reliability):
+        """Initialise an UnreliableCar."""
+        super().__init__(name, fuel)
+        self.reliability = reliability
 
-    # attempt to drive the cars many times
-    # output what distance they drove
-    for i in range(1, 12):
-        print("Attempting to drive {}km:".format(i))
-        print("{:12} drove {:2}km".format(good_car.name, good_car.drive(i)))
-        print("{:12} drove {:2}km".format(bad_car.name, bad_car.drive(i)))
-
-    # print the final states of the cars
-    print(good_car)
-    print(bad_car)
-main()
+    def drive(self, distance):
+        """Drive the car, only sometimes, based on reliability."""
+        random_number = randint(1, 100)
+        if random_number >= self.reliability:
+            distance = 0
+        # Either way, we want to call the parent class's drive method (maybe driving 0)
+        distance_driven = super().drive(distance)
+        return distance_driven
