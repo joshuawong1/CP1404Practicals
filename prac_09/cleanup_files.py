@@ -22,6 +22,7 @@ def main():
     for filename in os.listdir('.'):
 
         if os.path.isdir(filename):
+
             continue
 
         new_name = get_fixed_filename(filename)
